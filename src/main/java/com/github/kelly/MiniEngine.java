@@ -1,0 +1,38 @@
+package com.github.kelly;
+
+import org.eclipse.jetty.server.Server;
+import java.util.HashMap;
+import java.util.Map;
+
+public class MiniEngine {
+
+    private Server server;
+    private int port = -1;
+    private final Map<RequestKey, RequestHandler> handlerMap = new HashMap<>();
+
+    public void configurePort(int port) {
+        this.port = port;
+    }
+
+    public void start() {
+
+        int serverPort = 8080;
+        if (port >= 1) {
+            serverPort = port;
+        }
+
+        this.server = new Server(serverPort);
+
+        try {
+            this.server.start();
+            this.server.join();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
+
+    public void addHandler(String path, RequestHandler requestHandler, HttpMethod method) {
+        final RequestKey key = new RequestKey(path, method);
+        handlerMap.put(key, requestHandler);
+    }
+}
