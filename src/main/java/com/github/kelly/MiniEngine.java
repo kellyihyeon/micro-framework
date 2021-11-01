@@ -8,7 +8,7 @@ public class MiniEngine {
 
     private Server server;
     private int port = -1;
-    private final Map<RequestKey, RequestHandler> handlerMap = new HashMap<>();
+    private final Map<RequestKey, RequestHandler> handlerMap = new HashMap<>();     // 가이드
 
     public void configurePort(int port) {
         this.port = port;
@@ -22,6 +22,8 @@ public class MiniEngine {
         }
 
         this.server = new Server(serverPort);
+        final HttpHandler handler = new HttpHandler(handlerMap);
+        this.server.setHandler(handler);
 
         try {
             this.server.start();

@@ -1,6 +1,8 @@
 package com.github.kelly;
 
-// 이게 뭘까?
+/**
+ * request, response
+ */
 public interface Context {
 
     Response response();
