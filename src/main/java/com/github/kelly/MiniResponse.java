@@ -14,7 +14,7 @@ public class MiniResponse implements Response{
     }
 
     @Override
-    public void text(String text) {
+    public void text(String text) { // "Hello, Framework!"
         responseWrapper.setStatus(200);
         responseWrapper.setContentType("text/plain");
         try {
